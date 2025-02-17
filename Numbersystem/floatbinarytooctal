@@ -1,0 +1,164 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+int madenumber(int a[3]);
+int madenumber2(int c[3],int );
+int decimal(int);
+void main()
+{
+    char ch[100];
+    printf("Enter the binary number..\n");
+    scanf("%s", ch);
+    int n = strlen(ch);
+    int k = 0;
+    int count = 0;
+    while (ch[k] != '.' && k < n)
+    {
+        k++;
+    }
+    count = k;
+    if (count == n)
+    {
+        int i = n - 1;
+        int a[3];
+        int b[30];
+        int p = 0, count2 = 0;
+        while (i >= 0)
+        {
+
+            for (int j = 0; j < 3; j++)
+            {
+                a[j] = ch[i];
+                if (a[j] == 48)
+                {
+                    a[j] = 0;
+                }
+                else if (a[j] == 49)
+                {
+                    a[j] = 1;
+                }
+
+                i--;
+            }
+            int n = madenumber(a);
+            b[p] = decimal(n);
+            p++;
+        }
+        count2 = p - 1;
+        for (int i = count2; i >= 0; i--)
+        {
+
+            printf("%d", b[i]);
+        }
+    }
+    else
+    {
+        int i = count - 1;
+        int a[3];
+        int b[30];
+        int p = 0, count2 = 0;
+        while (i >= 0)
+        {
+
+            for (int j = 0; j < 3; j++)
+            {
+                a[j] = ch[i];
+                if (a[j] == 48)
+                {
+                    a[j] = 0;
+                }
+                else if (a[j] == 49)
+                {
+                    a[j] = 1;
+                }
+
+                i--;
+            }
+            int n = madenumber(a);
+            b[p] = decimal(n);
+            p++;
+        }
+        count2 = p - 1;
+        printf("Octal number is:\n");
+        for (int i = count2; i >= 0; i--)
+        {
+
+            printf("%d", b[i]);
+        }
+        printf(".");
+         int c[3] ,  d[30] , l=0;
+         printf("count+1==%d\n",count+1);
+        for(int i = count + 1 ; i<n ;)
+        {
+            printf("i==%d\n",i); int f = 0 ;
+            for (int j = 0; j < 3; j++)
+            {
+                c[j] = ch[i];
+                if (c[j] == 48)
+                {
+                    c[j] = 0;
+                }
+                else if (c[j] == 49)
+                {
+                    c[j] = 1;
+                }
+                printf("%d\n",c[j]);
+                i++;
+                printf("new i == %d\n",i);
+                if(i==n)
+                {
+                    break ;
+                }
+                    f++;
+                }
+            printf("f==%d\n",f);
+            int n = madenumber2(c,f+1);
+            d[l] = decimal(n);
+            l++;
+            for(int i = 0 ; i<l ; i++)
+            {
+                printf("%d",d[i]);
+            }
+
+    }
+}
+}
+int madenumber(int a[3])
+{
+
+    int sum = 0;
+    int j = 0;
+    for (int i = 0; i < 3; i++)
+    {
+
+        sum = sum + a[i] * pow(10, j);
+        j++;
+    }
+    return sum;
+}
+int madenumber2(int c[],int n)
+{
+    int sum = 0 ;
+    int j = 2 ; 
+    for(int i = 0 ; i<n ; i++)
+    {
+        sum = sum + c[i]*pow(10,j);
+        j--;
+    }
+    return sum ; 
+}
+int decimal(int n)
+{
+    int i = 0;
+    int r;
+    int sum = 0;
+    while (n != 0)
+    {
+
+        r = n % 10;
+        n = n / 10;
+        sum = sum + r * pow(2, i);
+        i++;
+    }
+    return sum;
+}
